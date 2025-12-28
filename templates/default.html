@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <script type="text/javascript">
+        function softRefresh() {
+            location.replace(location.href);
+        }
+
+        setTimeout(softRefresh, 60000); // every minute
+    </script>
+</head>
+<body>
+    <table>
+        ${tz-data}
+    </table>
+</body>
+</html>

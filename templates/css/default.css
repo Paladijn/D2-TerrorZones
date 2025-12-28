@@ -1,0 +1,14 @@
+body {
+    font-family: Exocet;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+tr.current {
+    background-color: #E67E22;
+    font-weight: bold;
+}
+
+tr.upcoming {
+    background-color: grey;
+}
