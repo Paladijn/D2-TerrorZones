@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.time.Duration;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -70,34 +70,21 @@ public class TZResource {
 
     private String getRowForTZ(TerrorZone tz, boolean isCurrent) {
         String timeLeft = isCurrent
-                ? "Current"
-                : getRemainingHoursAndMinutes(tz.dateTime());
+                ? "Now"
+                : getTZDisplayHour(tz.dateTime(), ZoneId.systemDefault());
         String zoneStyle = isCurrent
                 ? "current"
                 : "upcoming";
         return "<tr class=\"%s\">".formatted(zoneStyle) +
                 "<td>%s</td>".formatted(timeLeft) +
-                "<td>%s</td>".formatted(tz.zone().enUS()) +
+                "<td>%s</td>".formatted(tz.zone().enUS().replace(",", "<br/>")) +
 //                "<td>%s</td>".formatted(String.join(",", tz.immunities())) +
                 "</tz>";
     }
 
-    private String getRemainingHoursAndMinutes(ZonedDateTime startTime) {
-        Duration duration = Duration.between(ZonedDateTime.now(), startTime);
-        long hours = duration.toHoursPart();
-        long minutes = duration.toMinutesPart();
-        if (duration.toSecondsPart() > 0) {
-            minutes++;
-        }
-        if (duration.toMinutesPart() == 60) {
-            hours++;
-        }
-        if (hours == 1) {
-            return "%s hour".formatted(hours);
-        } else if (hours > 1) {
+    protected String getTZDisplayHour(ZonedDateTime startTime, ZoneId zoneId) {
+        final ZonedDateTime ldt = startTime.withZoneSameInstant(zoneId);
 
-            return "%s hours".formatted(hours);
-        }
-        return "%d minute".formatted(minutes);
+        return "%s:00".formatted(ldt.getHour());
     }
 }
