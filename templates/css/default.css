@@ -6,7 +6,6 @@ body {
 
 tr.current {
     background-color: #E67E22;
-    font-weight: bold;
 }
 
 tr.upcoming {

@@ -20,7 +20,7 @@
 
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.4</surefire-plugin.version>
-        <maven.versions.plugin>2.19.1</maven.versions.plugin>
+        <maven.versions.plugin>2.20.1</maven.versions.plugin>
     </properties>
 
     <dependencyManagement>
